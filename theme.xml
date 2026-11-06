@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BatWiiCeraU - Wii U menu inspired theme for Batocera (EmulationStation theme formatVersion 7)
+  Layout measured from the Wii U menu screenshot. System icons: ES-DE-System-Icon-Set by Zoidburg13 (CC0).
+  Fallback console art, menu glyph icons and Cabin font: es-theme-carbon by Fabrice Caruso (CC BY-NC-SA).
+-->
+<theme defaultView="system">
+  <formatVersion>7</formatVersion>
+  <variables>
+    <accent>14BBC2</accent>
+    <textDark>4A5A66</textDark>
+    <fontBold>${themePath}/art/fonts/Cabin-Bold.ttf</fontBold>
+    <fontReg>${themePath}/art/fonts/Cabin-Regular.ttf</fontReg>
+  </variables>
+
+  <!-- ===== Shared: static background picture (a frame of the video), profile tile ===== -->
+  <view name="system, basic, detailed, grid">
+    <image name="bgBase" extra="static">
+      <path>${themePath}/art/bg.jpg</path>
+      <pos>0 0</pos><size>1 1</size><zIndex>0</zIndex>
+    </image>
+
+    <!-- Profile tile, where the Mii sits (top-left) -->
+    <ninepatch name="profileTile" extra="static">
+      <path>${themePath}/art/tile.png</path>
+      <cornerSize>40 40</cornerSize>
+      <pos>0.027 0.040</pos><size>0.090 0.160</size><zIndex>50</zIndex>
+    </ninepatch>
+    <image name="avatar" extra="static">
+      <path>${themePath}/art/avatar.png</path>
+      <pos>0.072 0.120</pos><origin>0.5 0.5</origin>
+      <maxSize>0.066 0.117</maxSize><zIndex>51</zIndex>
+    </image>
+    <webimage name="raAvatar" extra="static">
+      <path>"https://media.retroachievements.org/UserPic/" + {global:cheevosUser} + ".png"</path>
+      <pos>0.072 0.120</pos><origin>0.5 0.5</origin>
+      <maxSize>0.066 0.117</maxSize><zIndex>52</zIndex>
+    </webimage>
+    <text name="raName" extra="static" if="${global.cheevos}">
+      <text>${cheevos.username}</text>
+      <pos>0.027 0.207</pos><size>0.090 0.035</size>
+      <fontPath>${fontBold}</fontPath><fontSize>0.024</fontSize>
+      <color>${textDark}</color><alignment>center</alignment><zIndex>51</zIndex>
+    </text>
+  </view>
+
+  <!-- ===== System view: Wii U home grid (5 x 3), one tile per system ===== -->
+  <view name="system">
+    <!-- Theme music: loops while you browse (needs START > Sound Settings > Frontend Music and Play System-Specific Music on) -->
+    <sound name="bgsound">
+      <path>${themePath}/art/music/BatWiiCeraTheme.mp3</path>
+    </sound>
+    <!-- Name must start with "staticBackground": EmulationStation keeps this video alive while you move between systems -->
+    <video name="staticBackgroundVideo">
+      <path>${themePath}/art/background.mp4</path>
+      <pos>0 0</pos><size>1 1</size><zIndex>1</zIndex>
+    </video>
+    <!-- decorative page dots, like the real menu's page indicator -->
+    <image name="dot0" extra="static">
+      <path>${themePath}/art/dot.png</path><color>14BBC2</color>
+      <pos>0.4318 0.0467</pos><size>0.019 0.0222</size><zIndex>50</zIndex>
+    </image>
+    <image name="dot1" extra="static">
+      <path>${themePath}/art/dot.png</path><color>BEBEB9</color>
+      <pos>0.4606 0.0508</pos><size>0.0078 0.0139</size><zIndex>50</zIndex>
+    </image>
+    <image name="dot2" extra="static">
+      <path>${themePath}/art/dot.png</path><color>BEBEB9</color>
+      <pos>0.4848 0.0508</pos><size>0.0078 0.0139</size><zIndex>50</zIndex>
+    </image>
+    <image name="dot3" extra="static">
+      <path>${themePath}/art/dot.png</path><color>BEBEB9</color>
+      <pos>0.5091 0.0508</pos><size>0.0078 0.0139</size><zIndex>50</zIndex>
+    </image>
+    <image name="dot4" extra="static">
+      <path>${themePath}/art/dot.png</path><color>BEBEB9</color>
+      <pos>0.5341 0.0508</pos><size>0.0078 0.0139</size><zIndex>50</zIndex>
+    </image>
+    <image name="dot5" extra="static">
+      <path>${themePath}/art/dot.png</path><color>BEBEB9</color>
+      <pos>0.5591 0.0508</pos><size>0.0078 0.0139</size><zIndex>50</zIndex>
+    </image>
+
+    <imagegrid name="imagegrid">
+      <zIndex>20</zIndex>
+      <pos>0.1448 0.1240</pos>
+      <size>0.7083 0.6954</size>
+      <autoLayout>5 3</autoLayout>
+      <cellProportion>1.0</cellProportion>
+      <margin>0.026 0.0324</margin>
+      <padding>0 0 0 0</padding>
+      <autoLayoutSelectedZoom>1.08</autoLayoutSelectedZoom>
+      <itemTemplate>
+        <container>
+          <ninepatch name="tileBg">
+            <pos>0 0</pos><size>1 1</size>
+            <path>${themePath}/art/tile.png</path>
+            <cornerSize>40 40</cornerSize>
+            <zIndex>1</zIndex>
+            <storyboard event="activate">
+              <animation property="path" to="${themePath}/art/tile_sel.png"/>
+            </storyboard>
+            <storyboard event="deactivate">
+              <animation property="path" to="${themePath}/art/tile.png"/>
+            </storyboard>
+          </ninepatch>
+          <image name="sysIcon" extra="true">
+            <path>${themePath}/art/systems/${system.theme}.png</path>
+            <path>none</path>
+            <path>firstfile("${themePath}/art/systems/" + {system:theme} + ".png", "${themePath}/art/consoles/" + {system:theme} + ".png")</path>
+            <pos>0.5 0.5</pos><origin>0.5 0.5</origin>
+            <maxSize>0.72 0.72</maxSize>
+            <linearSmooth>true</linearSmooth>
+            <zIndex>3</zIndex>
+          </image>
+          <text name="sysNameBig" extra="true">
+            <visible>!exists("${themePath}/art/systems/" + {system:theme} + ".png") &amp;&amp; !exists("${themePath}/art/consoles/" + {system:theme} + ".png")</visible>
+            <text>{system:fullName}</text>
+            <pos>0.5 0.5</pos><origin>0.5 0.5</origin><size>0.72 0.6</size>
+            <alignment>center</alignment>
+            <fontPath>${fontBold}</fontPath><fontSize>0.03</fontSize>
+            <color>${textDark}</color>
+            <zIndex>4</zIndex>
+          </text>
+        </container>
+      </itemTemplate>
+    </imagegrid>
+
+  </view>
+
+  <!-- ===== Game lists ===== -->
+  <view name="basic, detailed">
+    <text name="logoText">
+      <pos>0.5 0.03</pos><origin>0.5 0</origin><size>0.4 0.07</size>
+      <color>${textDark}</color><fontPath>${fontBold}</fontPath><fontSize>0.05</fontSize>
+      <alignment>center</alignment><zIndex>53</zIndex>
+    </text>
+    <textlist name="gamelist">
+      <pos>0.1448 0.18</pos><size>0.40 0.74</size>
+      <selectorColor>${accent}</selectorColor>
+      <selectedColor>FFFFFF</selectedColor>
+      <primaryColor>${textDark}</primaryColor>
+      <secondaryColor>${accent}</secondaryColor>
+      <fontPath>${fontBold}</fontPath><fontSize>0.032</fontSize>
+      <alignment>left</alignment><horizontalMargin>0.01</horizontalMargin>
+      <zIndex>20</zIndex>
+    </textlist>
+  </view>
+  <view name="detailed">
+    <image name="md_image">
+      <pos>0.75 0.40</pos><origin>0.5 0.5</origin><maxSize>0.30 0.40</maxSize><zIndex>30</zIndex>
+    </image>
+    <text name="md_description">
+      <pos>0.57 0.66</pos><size>0.36 0.26</size>
+      <fontPath>${fontReg}</fontPath><fontSize>0.024</fontSize>
+      <color>${textDark}</color><zIndex>40</zIndex>
+    </text>
+  </view>
+
+
+  <!-- ===== Grid game list: same glass tiles as the home screen, selected game's name at the top ===== -->
+  <view name="grid">
+    <imagegrid name="gamegrid">
+      <zIndex>20</zIndex>
+      <pos>0.1448 0.1240</pos>
+      <size>0.7083 0.6954</size>
+      <margin>0.026 0.0324</margin>
+      <padding>0 0 0 0</padding>
+      <scrollDirection>vertical</scrollDirection>
+      <imageSource>thumbnail</imageSource>
+    </imagegrid>
+    <gridtile name="default">
+      <size>0.1209 0.2102</size>
+      <padding>22 22</padding>
+      <imageSizeMode>maxSize</imageSizeMode>
+      <backgroundImage>${themePath}/art/tile.png</backgroundImage>
+      <backgroundCornerSize>40 40</backgroundCornerSize>
+      <backgroundColor>FFFFFFFF</backgroundColor>
+    </gridtile>
+    <gridtile name="selected">
+      <size>0.1306 0.2270</size>
+      <padding>22 22</padding>
+      <imageSizeMode>maxSize</imageSizeMode>
+      <backgroundImage>${themePath}/art/tile_sel.png</backgroundImage>
+      <backgroundCornerSize>40 40</backgroundCornerSize>
+      <backgroundColor>FFFFFFFF</backgroundColor>
+    </gridtile>
+    <!-- no names inside the tiles (like the real menu) -->
+    <text name="gridtile"><color>00000000</color></text>
+    <text name="gridtile_selected"><color>00000000</color></text>
+    <text name="md_name">
+      <pos>0.5 0.075</pos><origin>0.5 0</origin><size>0.6 0.05</size>
+      <fontPath>${fontBold}</fontPath><fontSize>0.034</fontSize>
+      <color>${textDark}</color><alignment>center</alignment><zIndex>53</zIndex>
+    </text>
+  </view>
+
+  <!-- ===== START menu icons ===== -->
+  <view name="menu">
+    <menuIcons name="menuicons">
+      <iconKodi>./art/icons/Kodi.png</iconKodi>
+      <iconSystem>./art/icons/System.png</iconSystem>
+      <iconUpdates>./art/icons/Updates.png</iconUpdates>
+      <iconGames>./art/icons/Games.png</iconGames>
+      <iconControllers>./art/icons/Controllers.png</iconControllers>
+      <iconUI>./art/icons/UI.png</iconUI>
+      <iconSound>./art/icons/Sound.png</iconSound>
+      <iconNetwork>./art/icons/Network.png</iconNetwork>
+      <iconPlanemode>./art/icons/Planemode.png</iconPlanemode>
+      <iconScraper>./art/icons/Scraper.png</iconScraper>
+      <iconAdvanced>./art/icons/Advanced.png</iconAdvanced>
+      <iconQuit>./art/icons/Quit.png</iconQuit>
+      <iconRestart>./art/icons/Restart.png</iconRestart>
+      <iconShutdown>./art/icons/Shutdown.png</iconShutdown>
+      <iconFastShutdown>./art/icons/Fastshutdown.png</iconFastShutdown>
+      <iconRetroachievements>./art/icons/Contest.png</iconRetroachievements>
+      <iconManual>./art/icons/Manual.png</iconManual>
+    </menuIcons>
+  </view>
+
+  <view name="screen">
+    <text name="clock">
+      <pos>0.98 0.035</pos><origin>1 0</origin>
+      <fontPath>${fontBold}</fontPath><fontSize>0.04</fontSize>
+      <color>${textDark}</color><zIndex>60</zIndex>
+    </text>
+  </view>
+</theme>
