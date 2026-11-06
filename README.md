@@ -39,7 +39,7 @@ ffmpeg -i "Wii U Menu 16:9.mp4" -an -c:v libx264 -profile:v high -pix_fmt yuv420
 It plays on the home screen only. Without the file you get a still background (`art/bg.jpg`).
 
 ## Theme music (not included)
-Song link: **TODO: add the link to the song here**
+Song link: https://downloads.khinsider.com/game-soundtracks/album/wii-u-system-audio-background-music/06.%2520System%2520Music%2520-%2520Wii%2520U%2520Home%2520Menu%2520%2528TV%2529.mp3
 
 Save your song as `art/music/BatWiiCeraTheme.mp3`. It loops while you browse, and needs START > Sound Settings:
 **Frontend Music = ON** and **Play System-Specific Music = ON**. To use a different file name, edit the
