@@ -7,6 +7,21 @@ RetroAchievements profile where the Mii would be.
 > **Status: experimental.** Built from the Batocera theme documentation and source code, but not yet tested on a
 > real device. Expect rough edges and please open an issue with a screenshot if something looks wrong.
 
+## Preview
+
+![Home screen mock-up](docs/home-screen.png)
+
+*Home screen with the Wii U selected. The profile tile (top-left) shows your RetroAchievements picture and
+username once you are logged in; here it is the grey placeholder.*
+
+![System icons](docs/system-icons.png)
+
+*Some of the system icons included.*
+
+> **These are mock-ups, not screenshots.** They were rendered from the theme's own artwork and layout numbers,
+> on a plain background, because the theme has not been run on a device yet. Real screenshots are welcome:
+> open an issue or pull request with one.
+
 ## Features
 - 5x3 tile grid with a glassy bevel and teal selection border; the selected tile zooms slightly
 - Profile tile top-left that downloads **your RetroAchievements picture** and shows your username
